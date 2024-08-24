@@ -18,7 +18,8 @@ const CountdownTimer = () => {
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours =
-        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + days * 24
+        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) +
+        days * 24;
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -46,13 +47,11 @@ const CountdownTimer = () => {
   }, [countDownDate]);
 
   return (
-    <div>
-      {timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0 ? (
-        <p>
-          {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-        </p>
-      ) : (
-        <p>EXPIRED</p>
+    <div className="w-[200px] flex justify-center items-center ">
+      {(timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0) && (
+        <span className="text-white text-xl">
+          {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s left
+        </span>
       )}
     </div>
   );
