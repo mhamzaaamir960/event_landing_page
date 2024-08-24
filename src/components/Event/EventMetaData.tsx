@@ -6,10 +6,11 @@ import { FaLinkedin, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
 import CountdownTimer from "./Timer";
+import { Form } from "../Form";
 
 function EventMetaData() {
   return (
-    <div >
+    <div>
       {/* Event Title */}
       <h2 className="text-white text-3xl font-bold">
         Want to win the Smart India Hackathon but have questions? ✨
@@ -59,9 +60,7 @@ function EventMetaData() {
 
       {/* Register Button and timer */}
       <div className="min-h-[55px] max-h-[80px] h-full flex flex-wrap justify-around items-center bg-hexColor rounded-md">
-        <button className="text-xl font-medium bg-white h-fit px-12  rounded-md">
-          Register Now
-        </button>
+        <Form triggerName="Register Now" />
         <CountdownTimer />
       </div>
     </div>
