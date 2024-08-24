@@ -6,7 +6,7 @@ import { FaLinkedin, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
 import CountdownTimer from "./Timer";
-import { Form } from "../Form";
+import { Form } from "../ReuseableComponents/Form";
 
 function EventMetaData() {
   return (

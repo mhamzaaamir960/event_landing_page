@@ -1,5 +1,5 @@
 import React from "react";
-import MaxWidthWrapper from "../MaxWidthWrapper";
+import MaxWidthWrapper from "../ReuseableComponents/MaxWidthWrapper";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 import Profile from "./Profile";
