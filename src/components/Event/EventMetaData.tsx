@@ -59,9 +59,9 @@ function EventMetaData() {
       </div>
 
       {/* Register Button and timer */}
-      <div className="min-h-[55px] max-h-[80px] h-full flex flex-wrap justify-around items-center bg-hexColor rounded-md">
+      <div className="min-h-[55px] max-h-[80px] h-full  flex flex-wrap justify-around items-center bg-hexColor rounded-md px-4">
         <Form triggerName="Register Now" />
-        {<CountdownTimer />}
+        <CountdownTimer />
       </div>
     </div>
   );
