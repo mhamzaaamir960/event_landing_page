@@ -47,7 +47,7 @@ function EventMetaData() {
             <FaLinkedin className="text-2xl text-[#0A66C2]" />
           </Link>
           <Link href={""}>
-            <FaInstagram className="bg-gradient-to-r from-[#FEDA77] via-[#DD2A7B] to-[#515BD4] rounded text-2xl text-white" />
+            <FaInstagram className="bg-gradient-to-r from-[#FEDA77] via-[#DD2A7B] to-[#515BD4] rounded-md text-2xl text-white" />
           </Link>
           <Link href={""}>
             <FaXTwitter className="text-2xl text-black" />
