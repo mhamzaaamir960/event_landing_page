@@ -48,11 +48,11 @@ const CountdownTimer = () => {
 
   return (
     <div className="w-[200px] flex justify-center items-center ">
-      {(timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0) && (
+      {(timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0) ? (
         <span className="text-white text-xl">
           {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s left
         </span>
-      )}
+      ): <p className="text-white text-lg animate-pulse">Event Time End</p>}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import "./loader.css";
 import {
   Dialog,
   DialogContent,
@@ -29,6 +30,9 @@ export function Form({
   triggerName: string;
   className?: string;
 }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   const [data, setData] = useState<dataType>({
     name: "",
     email: "",
@@ -52,24 +56,47 @@ export function Form({
       Branch: data.branch,
       Year: data.year,
     };
+    try {
+      setError(false);
+      setIsSubmitting(true);
+      const response = await axios.post(
+        "https://sheetdb.io/api/v1/l61zex6ageojm",
+        register
+      );
+      if (!response) {
+        throw new Error("Something went wrong!");
+      }
 
-    await axios.post("https://sheetdb.io/api/v1/l61zex6ageojm", register);
+      setData({
+        name: "",
+        email: "",
+        contact: "",
+        college: "",
+        branch: "",
+        year: "",
+      });
 
-    setData({
-      name: "",
-      email: "",
-      contact: "",
-      college: "",
-      branch: "",
-      year: "",
-    });
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 2000);
+    } catch (error) {
+      setIsSubmitting(false);
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <Dialog>
       <DialogTrigger asChild>
         <button
           className={cn(
-            `text-xl font-medium bg-white h-fit px-12  rounded-md`,
+            `text-xl font-medium bg-white h-fit px-10  rounded-md hover:bg-white/80 transition-all duration-200 delay-75 ease-in-out`,
             className
           )}
         >
@@ -90,9 +117,10 @@ export function Form({
               name="name"
               type="text"
               className="col-span-4 sm:col-span-2"
-              placeholder="Full Name"
+              placeholder="Full Name*"
               value={data.name}
               required={true}
+              disabled={isSubmitting}
               onChange={handleChange}
             />
             <Input
@@ -100,9 +128,10 @@ export function Form({
               name="email"
               type="email"
               className="col-span-4 sm:col-span-2"
-              placeholder="Email"
+              placeholder="Email*"
               value={data.email}
               required={true}
+              disabled={isSubmitting}
               onChange={handleChange}
             />
           </div>
@@ -112,9 +141,10 @@ export function Form({
               name="contact"
               type="tel"
               className="col-span-4 sm:col-span-2"
-              placeholder="Contact No"
+              placeholder="Contact No*"
               value={data.contact}
               required={true}
+              disabled={isSubmitting}
               onChange={handleChange}
             />
             <Input
@@ -122,9 +152,10 @@ export function Form({
               name="college"
               type="text"
               className="col-span-4 sm:col-span-2"
-              placeholder="College"
+              placeholder="College*"
               value={data.college}
               required={true}
+              disabled={isSubmitting}
               onChange={handleChange}
             />
           </div>
@@ -134,9 +165,10 @@ export function Form({
               id="branch"
               name="branch"
               className="col-span-4 sm:col-span-2"
-              placeholder="Branch"
+              placeholder="Branch*"
               value={data.branch}
               required={true}
+              disabled={isSubmitting}
               onChange={handleChange}
             />
             <Input
@@ -144,20 +176,34 @@ export function Form({
               id="year"
               name="year"
               className="col-span-4 sm:col-span-2"
-              placeholder="Year"
+              placeholder="Year*"
               value={data.year}
               required={true}
+              disabled={isSubmitting}
               onChange={handleChange}
             />
           </div>
         </div>
         <DialogFooter>
+          <div>
+            {isSubmitted && (
+              <p className="text-start text-green-500">
+                Message sent successfully!
+              </p>
+            )}
+          </div>
+          <div>
+            {error && (
+              <p className="text-start text-red-500">Something went wrong!</p>
+            )}
+          </div>
           <button
             className="px-6 py-2 rounded-md bg-black text-white hover:bg-black/90"
             onClick={handleSubmit}
             type="submit"
+            disabled={isSubmitting}
           >
-            Send
+            {isSubmitting ? <div className="loader" /> : <span>Send</span>}
           </button>
         </DialogFooter>
       </DialogContent>
